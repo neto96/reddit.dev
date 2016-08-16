@@ -29,11 +29,18 @@ Route::get('/sayhello/{firstName?}/{lastName?}', function($firstName = "John", $
 });
 
 Route::get('/uppercase/{name}', function($name) {
-	return "Hello, " . strtoupper($name);
+	$data = [
+		'name' => $name,
+		'uppercase' => strtoupper($name)
+	];
+	return view('uppercase', $data);
 });
 
 Route::get('/increment/{number}', function($number){
-	return "Your number $number plus 1 is equal to " . ($number + 1);
+	$data = [
+		'number' => $number
+	];
+	return view('increment', $data);
 });
 
 Route::get('/add/{num1}/{num2}', function($num1, $num2) {
