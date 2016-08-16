@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/uppercase/{name}', function($name) {
+	return "Hello, " . strtoupper($name);
+});
+
+Route::get('/increment/{number}', function($number){
+	return "Your number $number plus 1 is equal to " . ($number + 1);
+});
+
+Route::get('/add/{num1}/{num2}', function($num1, $num2) {
+	return "The sum of your numbers ($num1 & $num2) is equal to " . ($num1 + $num2);
+});
