@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@showWelcome');
 
 Route::get('/sayhello/{firstName?}/{lastName?}', function($firstName = "John", $lastName = "Doe")
 {
@@ -28,30 +26,13 @@ Route::get('/sayhello/{firstName?}/{lastName?}', function($firstName = "John", $
 	return view('my-first-view', $data);
 });
 
-Route::get('/uppercase/{name}', function($name) {
-	$data = [
-		'name' => $name,
-		'uppercase' => strtoupper($name)
-	];
-	return view('uppercase', $data);
-});
+Route::get('/increment/{number?}', 'HomeController@increment');
 
-Route::get('/increment/{number}', function($number){
-	$data = [
-		'number' => $number
-	];
-	return view('increment', $data);
-});
+Route::get('/uppercase/{name}', 'HomeController@uppercase');
+
 
 Route::get('/add/{num1}/{num2}', function($num1, $num2) {
 	return "The sum of your numbers ($num1 & $num2) is equal to " . ($num1 + $num2);
 });
 
-Route::get('/rolldice/{guess}', function($guess) {
-	$randomDice = rand(1, 6);
-	$data = [
-		'randomDice' => $randomDice,
-		'guess' => $guess
-	];
-	return view('roll-dice', $data);
-});
+Route::get('/rolldice/{guess}', 'HomeController@rollDice');
