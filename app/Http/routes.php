@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use \App\Post;
 
 Route::get('/', 'HomeController@showWelcome');
 
@@ -36,3 +37,6 @@ Route::get('/add/{num1}/{num2}', function($num1, $num2) {
 });
 
 Route::get('/rolldice/{guess}', 'HomeController@rollDice');
+
+//Route for posts page
+Route::resource('posts', 'PostsController');
