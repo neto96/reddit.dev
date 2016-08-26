@@ -64,7 +64,7 @@ class UserController extends Controller
 			abort(404);
 		}
 		$post = Post::where('created_by', $id)->orderBy('created_at')->get();
-		
+
 		$data = [
 			'user' => $user,
 			'posts' => $post
