@@ -17,6 +17,24 @@ class User extends BaseModel implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
+	public static $rules =
+		[
+			'name' => 'required|max:255',
+			'email' => 'required|email|max:244|unique:users',
+			'password' => 'required|min:6'
+		];
+	public static $updateRules = [
+			'name' => 'required|max:255',
+			'email' => 'required|email|max:244'
+		];
+
+	public static $passwordRules = [
+			'password' => 'required|min:6'
+	];
+
+	public static function isEmailDuplicate($email) {
+		return User::where('email', $email)->count()>0;
+	}
     /**
      * The database table used by the model.
      *

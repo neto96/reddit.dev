@@ -38,8 +38,13 @@ Route::get('/add/{num1}/{num2}', function($num1, $num2) {
 
 Route::get('/rolldice/{guess}', 'HomeController@rollDice');
 
-//Route for posts page
+//Update password
+Route::get('user/password/{id}', 'UserController@editPassword');
+Route::put('user/password/{id}', 'UserController@updatePassword');
+
+//Route for posts and user page
 Route::resource('posts', 'PostsController');
+Route::resource('user', 'UserController');
 
 //Authentication routes
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -49,3 +54,4 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 //Registrations routes
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
+

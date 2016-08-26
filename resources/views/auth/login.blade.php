@@ -17,6 +17,11 @@
             @include ('partials.errors', ['field' => 'password'])
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
-
     </form>
+    <p>
+    <form method="get" action="{{ action('Auth\AuthController@getRegister') }}">
+        <small>Don't have an account? </small><br>
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
+    </p>
 @stop

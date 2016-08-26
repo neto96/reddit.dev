@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Vote;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,7 +20,7 @@ class PostsController extends Controller
 
 	public function index()
     {
-    	$posts = Post::with('user')->paginate(4);
+    	$posts = Post::orderDesc(10);
 		$data = [
 			'posts' => $posts
 		];
@@ -43,7 +44,7 @@ class PostsController extends Controller
 		$post->content = $request->get('content');
 		$post->created_by = Auth::user()->id;
 		$post->save();
-		session()->flash('success', 'Your post was created succesfully!');
+		session()->flash('success', 'Your post was created successfully!');
 		return redirect()->action('PostsController@index');
 	}
 
@@ -95,4 +96,25 @@ class PostsController extends Controller
 		$request->session()->flash('success', 'Your post was deleted succesfully!');
     	return redirect()->action('PostsController@index');
     }
+
+    public function addVote(Request $request) {
+    	$vote = Vote::with('post')->firstOrCreate([
+    		'post_id' => $request->input('post_id'),
+			'user_id' => $request->user()->id
+		]);
+		$vote->vote = $request->input('vote');
+		$vote->save();
+
+		$post = $vote->post;
+		$post->vote_score = $post->voteScore();
+		$post->save();
+
+		$data = [
+			'vote_score' => $post->vote_score,
+			'vote' => $post->vote
+		];
+
+		return $data;
+
+	}
 }

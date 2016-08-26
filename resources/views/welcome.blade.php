@@ -38,8 +38,10 @@
     <body>
         <div class="container">
             <div class="content">
+                <img src="/img/alien.png">
                 <div class="title">Reddit Clone</div>
-                <div class="content"><a href="http://reddit.dev/posts">Proceed to Posts</a></div>
+                <div class="content"><a href="{{ action('PostsController@index') }}">Proceed to Posts</a></div>
+                <div class="content"><a href="{{ action('Auth\AuthController@getRegister') }}">Sign Up</a></div>
             </div>
         </div>
     </body>
